@@ -308,7 +308,7 @@ function verificarExpediente() {
 
   // Configure aqui o seu horário (use .5 para representar 30 minutos)
   const abreAs = 17.5;  // 17:30
-  const fechaAs = 23.5; // 23:30
+  const fechaAs = 23.0; // 23:30
 
   let lojaFechada = false;
 
