@@ -4,7 +4,7 @@ let produtoEmSelecao = null;
 // ==========================================
 // LÓGICA DE NAVEGAÇÃO E RENDERIZAÇÃO GERAL
 // ==========================================
-
+alert("O código está rodando!");
 function mostrarTela(idTela) {
   document.querySelectorAll(".container").forEach((t) => (t.style.display = "none"));
   document.getElementById(idTela).style.display = "block";
