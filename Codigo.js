@@ -298,7 +298,38 @@ function concluirPedidoWhatsApp() {
       return alert(`Os valores do pagamento ultrapassam o total da conta em R$ ${Math.abs(diferenca).toFixed(2).replace(".", ",")}.\nPor favor, ajuste.`);
     }
   }
+function verificarExpediente() {
+  const agora = new Date();
+  const hora = agora.getHours();
+  const minuto = agora.getMinutes();
+  
+  // Transforma o horário atual em um número decimal (Ex: 17h30 = 17.5)
+  const horaAtualDecimal = hora + (minuto / 60);
 
+  // Configure aqui o seu horário (use .5 para representar 30 minutos)
+  const abreAs = 17.5;  // 17:30
+  const fechaAs = 23.5; // 23:30
+
+  let lojaFechada = false;
+
+  // Se o horário atual for menor que 17.5 (17:30) OU maior/igual a 23.5 (23:30)
+  if (horaAtualDecimal < abreAs || horaAtualDecimal >= fechaAs) {
+    lojaFechada = true;
+  }
+
+  if (lojaFechada) {
+    // Força a tela de "Fechado" aparecer e esconde o resto
+    document.querySelectorAll(".container").forEach((t) => (t.style.display = "none"));
+    document.getElementById("telaFechado").style.display = "block";
+    
+    // Esconde qualquer link solto na tela de fechado
+    const linkAdmin = document.querySelector('a[onclick="acessarAdmin(); return false;"]');
+    if (linkAdmin) linkAdmin.parentElement.style.display = "none";
+  }
+}
+
+// Executa a verificação imediatamente quando o site carrega
+verificarExpediente();
   // Montar Texto do WhatsApp
   let temDinheiro = document.getElementById("checkDinheiro").checked;
   let linhas = [];
