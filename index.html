@@ -26,7 +26,18 @@
         Finalizar Pedido 📲
       </button>
     </div>
-
+    
+    <div id="telaFechado" class="container" style="display: none; text-align: center; margin-top: 50px;">
+      <h1 style="font-size: 3rem; margin-bottom: 10px;">🌙</h1>
+      <h2 style="color: var(--primary);">Estamos Fechados</h2>
+      <p style="color: #64748b; font-size: 16px; margin-top: 15px;">
+        Nosso horário de funcionamento é das <b>17:30 às 23:00</b>.
+      </p>
+      <p style="color: #64748b; font-size: 16px;">
+        Agradecemos a preferência e esperamos você amanhã!
+      </p>
+    </div>
+    
     <div id="telaProdutos" class="container" style="display: none">
       <button class="btn-voltar" onclick="mostrarTela('telaCarrinho')">
         ⬅ Voltar para o Carrinho
@@ -59,7 +70,7 @@
 
       <div id="listaAdicionais"></div>
     </div>
-
+    
     <div id="telaFinalizar" class="container" style="display: none">
       <h2>Dados do Pedido</h2>
       <select id="selectTipo" onchange="atualizarOpcoesEntrega()">
