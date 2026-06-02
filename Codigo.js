@@ -1,5 +1,6 @@
 let carrinho = [];
 let produtoEmSelecao = null;
+let categoriaAtiva = "Todos"; // Controla qual aba está selecionada
 
 // ==========================================
 // LÓGICA DE NAVEGAÇÃO E RENDERIZAÇÃO GERAL
@@ -13,7 +14,7 @@ function mostrarTela(idTela) {
     let total = carrinho.reduce((sum, item) => sum + item.preco, 0);
     document.getElementById("valorTotalFinalizar").innerText = `R$ ${total.toFixed(2).replace(".", ",")}`;
     atualizarOpcoesEntrega();
-    calcularFalta(); // Recalcula os status de pagamento ao abrir
+    calcularFalta();
   }
 }
 
@@ -36,29 +37,53 @@ function renderizarLanche(prod, index) {
   `;
 }
 
-function carregarListaProdutos() {
-  const lista = document.getElementById("listaProdutos");
-  lista.innerHTML = "";
-  
-  // Ordenar ordem alfabetica para organização visual
-  const dbOrdenado = [...dbProdutos].sort((a,b) => a.nome.localeCompare(b.nome));
+// Cria os botões de categoria com base no Produtos.js
+function renderizarCategorias() {
+  const menu = document.getElementById("menuCategorias");
+  menu.innerHTML = "";
 
-  dbOrdenado.forEach((prod, index) => {
-    // Como ordenamos, precisamos encontrar o index original no dbProdutos para manter a referencia
-    let originalIndex = dbProdutos.indexOf(prod);
-    lista.innerHTML += renderizarLanche(prod, originalIndex);
+  // Busca todas as categorias existentes e remove duplicadas
+  const categoriasUnicas = ["Todos", ...new Set(dbProdutos.map(p => p.categoria))];
+
+  categoriasUnicas.forEach(cat => {
+    // Se for a aba ativa, coloca uma classe CSS para dar destaque
+    const classeAtivo = cat === categoriaAtiva ? "ativo" : "";
+    menu.innerHTML += `
+      <button class="btn-categoria ${classeAtivo}" onclick="selecionarCategoria('${cat}')">
+        ${cat}
+      </button>
+    `;
   });
-  
+}
+
+// Ação de clicar em uma categoria
+function selecionarCategoria(categoria) {
+  categoriaAtiva = categoria;
+  renderizarCategorias(); // Recarrega os botões para atualizar a cor
+  filtrarProdutos();      // Filtra os lanches na tela
+}
+
+function carregarListaProdutos() {
+  categoriaAtiva = "Todos"; // Ao abrir a tela, sempre mostra tudo
+  document.getElementById("inputBusca").value = ""; // Limpa a barra de pesquisa
+  renderizarCategorias();
+  filtrarProdutos();
   mostrarTela("telaProdutos");
 }
 
 function filtrarProdutos() {
   let termo = document.getElementById("inputBusca").value.toLowerCase();
   let lista = document.getElementById("listaProdutos");
-  lista.innerHTML = "";
+  lista.innerHTML = ""; // Limpa apenas a lista de lanches
 
   dbProdutos.forEach((prod, index) => {
-    if (prod.nome.toLowerCase().includes(termo)) {
+    // Regra 1: Passa no campo de pesquisa?
+    const passaBusca = prod.nome.toLowerCase().includes(termo);
+    // Regra 2: Passa na Categoria clicada? (ou se "Todos" estiver selecionado)
+    const passaCategoria = categoriaAtiva === "Todos" || prod.categoria === categoriaAtiva;
+
+    // Só exibe na tela se obedecer as duas regras acima
+    if (passaBusca && passaCategoria) {
       lista.innerHTML += renderizarLanche(prod, index);
     }
   });
@@ -285,7 +310,6 @@ function concluirPedidoWhatsApp() {
 
   let checados = document.querySelectorAll('input[type="checkbox"][id^="check"]:checked').length;
 
-  // Validações
   if (carrinho.length === 0) return alert("Seu carrinho está vazio!");
   if (tipo === "Entrega" && !end) return alert("Por favor, digite o endereço de entrega!");
   if (checados === 0) return alert("Selecione pelo menos uma forma de pagamento!");
@@ -298,7 +322,6 @@ function concluirPedidoWhatsApp() {
     }
   }
 
-  // Montar Texto do WhatsApp
   let temDinheiro = document.getElementById("checkDinheiro").checked;
   let linhas = [];
 
@@ -310,7 +333,6 @@ function concluirPedidoWhatsApp() {
 
   linhas.push("");
   linhas.push("━━━━━━━━━━━━━━━");
-
   linhas.push("");
   linhas.push("*ITENS DO PEDIDO:*");
   linhas.push("");
@@ -361,35 +383,7 @@ function concluirPedidoWhatsApp() {
   }
 
   const texto = linhas.join("\n");
-  const numeroWhatsApp = "75998662255";
+  const numeroWhatsApp = "75998662255"; // Seu número
 
   window.location.href = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
 }
-document.addEventListener("DOMContentLoaded", function() {
-    
-    function verificarExpediente() {
-        const agora = new Date();
-        const horaAtualDecimal = agora.getHours() + (agora.getMinutes() / 60);
-
-        const abreAs = 17.5;  // 17:30
-        const fechaAs = 23.5; // 23:00
-
-        let lojaFechada = (horaAtualDecimal < abreAs || horaAtualDecimal >= fechaAs);
-
-        // Debug: Comente esta linha abaixo depois que funcionar
-        // console.log("Está fechado? " + lojaFechada);
-
-        const elFechado = document.getElementById("telaFechado");
-        const containers = document.querySelectorAll(".container");
-
-        if (lojaFechada && elFechado) {
-            containers.forEach((t) => (t.style.display = "none"));
-            elFechado.style.display = "block";
-        } else if (elFechado) {
-            elFechado.style.display = "none";
-        }
-    }
-
-    verificarExpediente();
-    setInterval(verificarExpediente, 60000);
-});

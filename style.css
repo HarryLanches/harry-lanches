@@ -33,6 +33,56 @@ body {
   font-size: 2rem;
 }
 
+/* ==================================
+   ÁREA FIXA DE BUSCA E CATEGORIAS 
+   ================================== */
+.area-fixa-busca {
+  position: sticky;
+  top: 0;
+  background: linear-gradient(180deg, #f8fafc 80%, rgba(248, 250, 252, 0));
+  z-index: 100;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  margin-top: -10px;
+}
+
+/* --- NOVA ESTRUTURA PARA ROLAGEM HORIZONTAL --- */
+.scroll-categorias {
+  display: flex;
+  flex-wrap: nowrap;         /* Garante que os botões NÃO quebrem linha */
+  overflow-x: auto;          /* Habilita a barra de rolagem */
+  padding: 10px 0;
+  margin-bottom: 15px;
+  -webkit-overflow-scrolling: touch; /* Deixa o scroll fluido no iPhone/Android */
+  scrollbar-width: none;     /* Esconde barra no Firefox */
+}
+
+.scroll-categorias::-webkit-scrollbar {
+  display: none;             /* Esconde barra no Chrome/Safari */
+}
+
+.btn-categoria {
+  flex: 0 0 auto;            /* IMPEDE que o botão encolha */
+  background: white;
+  border: 1px solid #e2e8f0;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #475569;
+  cursor: pointer;
+  white-space: nowrap;       /* Garante que o texto não quebre */
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.btn-categoria.ativo {
+  background: #f59e0b;
+  color: white;
+  border-color: #f59e0b;
+  box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
+}
+
 /* Lanches e Produtos */
 .lanche-card {
   background: white;

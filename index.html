@@ -43,7 +43,13 @@
         ⬅ Voltar para o Carrinho
       </button>
       <h2>Escolha seu Lanche</h2>
-      <input type="text" id="inputBusca" placeholder="🔍 Buscar lanche..." oninput="filtrarProdutos()" />
+      
+      <div class="area-fixa-busca">
+        <input type="text" id="inputBusca" placeholder="🔍 Buscar lanche..." oninput="filtrarProdutos()" />
+        <div id="menuCategorias" class="scroll-categorias">
+          </div>
+      </div>
+
       <div id="listaProdutos"></div>
     </div>
 
