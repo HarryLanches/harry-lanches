@@ -362,7 +362,7 @@ function concluirPedidoWhatsApp() {
   }
 
   const texto = linhas.join("\n");
-  const numeroWhatsApp = "75999166588";
+  const numeroWhatsApp = "7599866-2255";
 
   window.location.href = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
 }
