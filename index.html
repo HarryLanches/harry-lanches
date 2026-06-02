@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🍔 HARRY LANCHES 🍔</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="header-app">
+      <h1>🍔 HARRY LANCHES 🍔</h1>
+    </div>
+
+    <div id="telaCarrinho" class="container">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h2 style="margin: 0;">Seu Pedido</h2>
+        <span id="valorTotalHeader" style="font-weight: 700; color: #f59e0b; font-size: 1.2rem;">R$ 0,00</span>
+      </div>
+      
+      <div id="itensCarrinho"></div>
+      <button class="btn-acao" onclick="carregarListaProdutos()">
+        + Adicionar Lanche
+      </button>
+      <button class="btn-acao btn-finalizar-pedido" onclick="mostrarTela('telaFinalizar')">
+        Finalizar Pedido 📲
+      </button>
+    </div>
+
+    <div id="telaProdutos" class="container" style="display: none">
+      <button class="btn-voltar" onclick="mostrarTela('telaCarrinho')">
+        ⬅ Voltar para o Carrinho
+      </button>
+      <h2>Escolha seu Lanche</h2>
+      <input type="text" id="inputBusca" placeholder="🔍 Buscar lanche..." oninput="filtrarProdutos()" />
+      <div id="listaProdutos"></div>
+    </div>
+
+    <div id="telaAdicionais" class="container" style="display: none">
+      <button class="btn-voltar" onclick="mostrarTela('telaProdutos')">
+        ⬅ Voltar aos Lanches
+      </button>
+      <h2>Escolha os Adicionais</h2>
+
+      <div id="listaAdicionaisSelecionados" class="box-selecionados">
+        <small>Adicionais: Nenhum</small>
+      </div>
+
+      <textarea id="inputObservacao" placeholder="Ex: Remover cebola, sem maionese..."></textarea>
+
+      <div class="botoes-lado-a-lado">
+        <button class="btn-acao" onclick="finalizarItem()" style="background: #25d366; flex: 1">
+          Concluir
+        </button>
+        <button class="btn-acao" onclick="finalizarItem()" style="background: #ff4444; flex: 1">
+          Não Quero
+        </button>
+      </div>
+
+      <div id="listaAdicionais"></div>
+    </div>
+
+    <div id="telaFinalizar" class="container" style="display: none">
+      <h2>Dados do Pedido</h2>
+      <select id="selectTipo" onchange="atualizarOpcoesEntrega()">
+        <option value="Entrega">Receber em casa (Entrega)</option>
+        <option value="Buscar no Local">Vou buscar no Local</option>
+        <option value="Comer no Local">Comer no Local</option>
+      </select>
+
+      <input type="text" id="inputEndereco" placeholder="Endereço de Entrega (Rua, Número, Bairro)" />
+      <textarea id="inputObsGeral" placeholder="Observação Geral (Ex: Campainha quebrada, Casa de esquina...)"></textarea>
+
+      <div id="containerValorTotal" class="box-valor-total">
+        <div>
+          Total do Pedido:
+          <strong id="valorTotalFinalizar" style="color: var(--primary); font-size: 18px">R$ 0,00</strong>
+        </div>
+        <div id="statusPagamento" style="font-size: 14px; margin-top: 5px; color: #ff4444; font-weight: bold;">
+          Falta pagar: R$ 0,00
+        </div>
+      </div>
+
+      <h3 style="font-size: 14px; margin-bottom: 8px">Dividir pagamento em:</h3>
+      <div class="pagamento-container-vertical">
+        <div class="pagamento-linha">
+          <label><input type="checkbox" id="checkDinheiro" value="Dinheiro" onchange="togglePagamento('Dinheiro')" /> Dinheiro</label>
+          <input type="number" id="valorDinheiro" class="input-pgto" placeholder="R$ 0,00" style="display: none" oninput="calcularFalta()" />
+        </div>
+        <div class="pagamento-linha">
+          <label><input type="checkbox" id="checkPix" value="Pix" onchange="togglePagamento('Pix')" /> Pix</label>
+          <input type="number" id="valorPix" class="input-pgto" placeholder="R$ 0,00" style="display: none" oninput="calcularFalta()" />
+        </div>
+        <div class="pagamento-linha">
+          <label><input type="checkbox" id="checkCartao" value="Cartão" onchange="togglePagamento('Cartao')" /> Cartão</label>
+          <input type="number" id="valorCartao" class="input-pgto" placeholder="R$ 0,00" style="display: none" oninput="calcularFalta()" />
+        </div>
+      </div>
+
+      <div id="containerTroco" style="display: none">
+        <strong style="display: block; font-size: 14px; margin-bottom: 5px">Vai precisar de troco para o Dinheiro?</strong>
+        <input type="number" id="inputTroco" placeholder="Troco para quanto? (Ex: 50)" oninput="calcularTroco()" style="margin-bottom: 8px" />
+        <p id="exibicaoTroco" style="font-weight: bold; color: #25d366; margin-top: 5px"></p>
+        <label style="display: flex; align-items: center; gap: 5px; font-size: 14px; cursor: pointer;">
+          <input type="checkbox" id="checkboxSemTroco" onchange="toggleTrocoTexto()" /> Não preciso de troco
+        </label>
+      </div>
+
+      <button class="btn-acao" style="background: #25d366; margin-top: 10px" onclick="concluirPedidoWhatsApp()">
+        Enviar Pedido no WhatsApp 📲
+      </button>
+      <button class="btn-voltar" style="margin-top: 10px" onclick="mostrarTela('telaCarrinho')">
+        Voltar ao Carrinho
+      </button>
+    </div>
+
+    <script src="Produtos.js"></script>
+    <script src="Codigo.js"></script>
+  </body>
+</html>
