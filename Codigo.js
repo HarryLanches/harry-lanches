@@ -297,34 +297,7 @@ function concluirPedidoWhatsApp() {
       return alert(`Os valores do pagamento ultrapassam o total da conta em R$ ${Math.abs(diferenca).toFixed(2).replace(".", ",")}.\nPor favor, ajuste.`);
     }
   }
-document.addEventListener("DOMContentLoaded", function() {
-    
-    function verificarExpediente() {
-        const agora = new Date();
-        const horaAtualDecimal = agora.getHours() + (agora.getMinutes() / 60);
 
-        const abreAs = 17.5;  // 17:30
-        const fechaAs = 23.0; // 23:00
-
-        let lojaFechada = (horaAtualDecimal < abreAs || horaAtualDecimal >= fechaAs);
-
-        // Debug: Comente esta linha abaixo depois que funcionar
-        // console.log("Está fechado? " + lojaFechada);
-
-        const elFechado = document.getElementById("telaFechado");
-        const containers = document.querySelectorAll(".container");
-
-        if (lojaFechada && elFechado) {
-            containers.forEach((t) => (t.style.display = "none"));
-            elFechado.style.display = "block";
-        } else if (elFechado) {
-            elFechado.style.display = "none";
-        }
-    }
-
-    verificarExpediente();
-    setInterval(verificarExpediente, 60000);
-});
   // Montar Texto do WhatsApp
   let temDinheiro = document.getElementById("checkDinheiro").checked;
   let linhas = [];
@@ -392,3 +365,31 @@ document.addEventListener("DOMContentLoaded", function() {
 
   window.location.href = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
 }
+document.addEventListener("DOMContentLoaded", function() {
+    
+    function verificarExpediente() {
+        const agora = new Date();
+        const horaAtualDecimal = agora.getHours() + (agora.getMinutes() / 60);
+
+        const abreAs = 17.5;  // 17:30
+        const fechaAs = 23.0; // 23:00
+
+        let lojaFechada = (horaAtualDecimal < abreAs || horaAtualDecimal >= fechaAs);
+
+        // Debug: Comente esta linha abaixo depois que funcionar
+        // console.log("Está fechado? " + lojaFechada);
+
+        const elFechado = document.getElementById("telaFechado");
+        const containers = document.querySelectorAll(".container");
+
+        if (lojaFechada && elFechado) {
+            containers.forEach((t) => (t.style.display = "none"));
+            elFechado.style.display = "block";
+        } else if (elFechado) {
+            elFechado.style.display = "none";
+        }
+    }
+
+    verificarExpediente();
+    setInterval(verificarExpediente, 60000);
+});
