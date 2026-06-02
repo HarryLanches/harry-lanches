@@ -372,7 +372,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const horaAtualDecimal = agora.getHours() + (agora.getMinutes() / 60);
 
         const abreAs = 17.5;  // 17:30
-        const fechaAs = 23.0; // 23:00
+        const fechaAs = 23.5; // 23:00
 
         let lojaFechada = (horaAtualDecimal < abreAs || horaAtualDecimal >= fechaAs);
 
