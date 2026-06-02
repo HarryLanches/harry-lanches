@@ -103,6 +103,7 @@ function alterarQuantidade(index, delta, precoUnitario) {
 // LÓGICA DE ADICIONAIS E CARRINHO
 // ==========================================
 
+// Função 1: A que abre a tela
 function selecionarParaAdicionais(nome, index, precoUnitario) {
   let qtd = parseInt(document.getElementById(`qtd-${index}`).innerText);
   let precoTotal = qtd * precoUnitario;
@@ -117,18 +118,35 @@ function selecionarParaAdicionais(nome, index, precoUnitario) {
 
   document.getElementById("listaAdicionaisSelecionados").innerHTML = "<small>Adicionais: Nenhum</small>";
   document.getElementById("inputObservacao").value = "";
-
-  const lista = document.getElementById("listaAdicionais");
-  lista.innerHTML = "";
-  dbAdicionais.forEach((add) => {
-    let precoAddTotal = add.preco * qtd;
-    lista.innerHTML += `
-      <div class="produto-card" onclick="adicionarAdicional('${add.nome}', ${precoAddTotal})">
-          <span>${add.nome}</span> <span>+ R$ ${precoAddTotal.toFixed(2)}</span>
-      </div>
-    `;
-  });
+  
+  // Limpa o campo de busca toda vez que abre
+  document.getElementById("inputBuscaAdicionais").value = "";
+  
+  // Chama a função de renderizar (que agora está separada)
+  filtrarAdicionais();
+  
   mostrarTela("telaAdicionais");
+}
+
+// Função 2: A que busca e renderiza (NOVA)
+function filtrarAdicionais() {
+  const termo = document.getElementById("inputBuscaAdicionais").value.toLowerCase();
+  const lista = document.getElementById("listaAdicionais");
+  const qtd = produtoEmSelecao ? produtoEmSelecao.qtd : 1;
+  
+  lista.innerHTML = ""; // Limpa a lista atual
+  
+  // Filtra e desenha os cards
+  dbAdicionais.forEach((add) => {
+    if (add.nome.toLowerCase().includes(termo)) {
+      let precoAddTotal = add.preco * qtd;
+      lista.innerHTML += `
+        <div class="produto-card" onclick="adicionarAdicional('${add.nome}', ${precoAddTotal})">
+            <span>${add.nome}</span> <span>+ R$ ${precoAddTotal.toFixed(2)}</span>
+        </div>
+      `;
+    }
+  });
 }
 
 function adicionarAdicional(nome, preco) {
@@ -387,3 +405,58 @@ function concluirPedidoWhatsApp() {
 
   window.location.href = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
 }
+// Ativa arraste com mouse no PC
+const slider = document.querySelector('.scroll-categorias');
+let isDown = false;
+let startX;
+let scrollLeft;
+
+if (slider) {
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true;
+      slider.classList.add('active');
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+      isDown = false;
+    });
+
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 2; // O multiplicador '2' controla a velocidade do arraste
+      slider.scrollLeft = scrollLeft - walk;
+    });
+}
+// Fechamento Automático
+document.addEventListener("DOMContentLoaded", function() {
+    function verificarExpediente() {
+        const agora = new Date();
+        const horaAtualDecimal = agora.getHours() + (agora.getMinutes() / 60);
+
+        const abreAs = 17.5;  // 17:30
+        const fechaAs = 23.5; // 23:30
+
+        let lojaFechada = (horaAtualDecimal < abreAs || horaAtualDecimal >= fechaAs);
+
+        const elFechado = document.getElementById("telaFechado");
+        const containers = document.querySelectorAll(".container");
+
+        if (lojaFechada && elFechado) {
+            containers.forEach((t) => (t.style.display = "none"));
+            elFechado.style.display = "block";
+        } else if (elFechado) {
+            elFechado.style.display = "none";
+        }
+    }
+
+    verificarExpediente();
+    setInterval(verificarExpediente, 60000);
+});

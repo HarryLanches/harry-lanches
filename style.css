@@ -55,6 +55,8 @@ body {
   margin-bottom: 15px;
   -webkit-overflow-scrolling: touch; /* Deixa o scroll fluido no iPhone/Android */
   scrollbar-width: none;     /* Esconde barra no Firefox */
+  cursor: grab; /* Muda o cursor para uma mãozinha */
+  user-select: none; /* Evita que o usuário selecione o texto acidentalmente ao arrastar */
 }
 
 .scroll-categorias::-webkit-scrollbar {
@@ -81,6 +83,7 @@ body {
   color: white;
   border-color: #f59e0b;
   box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
+  cursor: grabbing; /* Muda o cursor para a mãozinha fechada ao clicar */
 }
 
 /* Lanches e Produtos */

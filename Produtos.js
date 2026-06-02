@@ -21,6 +21,13 @@ const dbProdutos = [
     { nome: "FRANGÃO", preco: 15.0, categoria: "LANCHES" },
     { nome: "FRANGO CATUPIRY", preco: 13.0, categoria: "LANCHES" },
     { nome: "FRANGUINHO", preco: 12.0, categoria: "LANCHES" },
+    { nome: "CORAÇÃO ACEBOLADO", preco: 16.0, categoria: "LANCHES" },
+    { nome: "EGGS BACON", preco: 15.0, categoria: "LANCHES" },
+    { nome: "EGGS BOVINO", preco: 11.0, categoria: "LANCHES" },
+    { nome: "EGGS BURGUER BOVINO", preco: 14.0, categoria: "LANCHES" },
+    { nome: "EGGS CALABRESA", preco: 16.0, categoria: "LANCHES" },
+    { nome: "EGGS COMPLETO", preco: 18.0, categoria: "LANCHES" },
+    { nome: "EMPANADINHO", preco: 17.0, categoria: "LANCHES" },
     { nome: "HAMBÚRGUER BOVINO", preco: 9.0, categoria: "LANCHES" },
     { nome: "HAMBÚRGUER GOURMET BACON", preco: 18.0, categoria: "LANCHES" },
     { nome: "HAMBÚRGUER GOURMET BARBECUE", preco: 19.0, categoria: "LANCHES" },
@@ -47,13 +54,6 @@ const dbProdutos = [
     { nome: "X-TOSCANA", preco: 18.0, categoria: "LANCHES" },
 
     // --- PORÇÕES ---
-    { nome: "CORAÇÃO ACEBOLADO", preco: 16.0, categoria: "PORÇÕES" },
-    { nome: "EGGS BACON", preco: 15.0, categoria: "PORÇÕES" },
-    { nome: "EGGS BOVINO", preco: 11.0, categoria: "PORÇÕES" },
-    { nome: "EGGS BURGUER BOVINO", preco: 14.0, categoria: "PORÇÕES" },
-    { nome: "EGGS CALABRESA", preco: 16.0, categoria: "PORÇÕES" },
-    { nome: "EGGS COMPLETO", preco: 18.0, categoria: "PORÇÕES" },
-    { nome: "EMPANADINHO", preco: 17.0, categoria: "PORÇÕES" },
     { nome: "PORÇÃO BATATA FRITA", preco: 17.0, categoria: "PORÇÕES" },
 
     // --- CUSCUZ ---
@@ -131,7 +131,6 @@ const dbAdicionais = [
     { nome: "CATUPIRY", preco: 2.0 },
     { nome: "CEBOLA CARAMELIZADA", preco: 2.0 },
     { nome: "CHEDDAR", preco: 2.0 },
-    { nome: "COPO DESCARTAVEL", preco: 0.5 },
     { nome: "FRANGO DESFIADO", preco: 4.0 },
     { nome: "KETCHUP", preco: 0.5 },
     { nome: "MAIONESE", preco: 0.5 },
@@ -143,5 +142,6 @@ const dbAdicionais = [
     { nome: "PRESUNTO", preco: 1.0 },
     { nome: "QUEIJO", preco: 1.0 },
     { nome: "SALADA", preco: 2.0 },
+    { nome: "COPO DESCARTAVEL", preco: 0.5 },
     { nome: "TALHER", preco: 0.5 }
 ];
