@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Admin - HARRYLANCHES</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <style>
+    /* O SEU CSS FOI MANTIDO INTACTO POIS O DESIGN ESTÁ EXCELENTE */
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+    :root { --primary: #0f172a; --secondary: #f59e0b; --bg: #f8fafc; --danger: #ef4444; --success: #22c55e; --card-bg: #ffffff; }
+    body { font-family: "Inter", sans-serif; background: linear-gradient(180deg, #f8fafc, #eef2ff); margin: 0; padding-bottom: 50px; color: #334155; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    .container { padding: 20px; max-width: 650px; margin: auto; }
+    .header-app { background: linear-gradient(135deg, #0f172a, #1e293b); color: #fff; padding: 25px 20px; text-align: center; border-radius: 0 0 25px 25px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); margin-bottom: 25px; }
+    h1, h2, h3 { margin-top: 0; }
+    .header-app h1 { font-size: 2rem; margin: 0; color: var(--secondary); letter-spacing: -0.5px;}
+    .header-app p { margin: 5px 0 0 0; font-size: 0.95rem; opacity: 0.8; }
+    .admin-card { background: var(--card-bg); padding: 16px; margin-bottom: 15px; border-radius: 14px; box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05); display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease; border: 1px solid #f1f5f9; }
+    .admin-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(15, 23, 42, 0.1); border-color: #e2e8f0; }
+    .admin-card-info { flex: 1; }
+    .admin-card-nome { font-weight: 700; font-size: 1.1rem; color: var(--primary); display: block; margin-bottom: 4px;}
+    .admin-card-detalhes { font-size: 0.9rem; color: #64748b; display: block; font-weight: 500;}
+    .admin-card-preco { color: var(--secondary); font-weight: 800; background: #fffbeb; padding: 2px 8px; border-radius: 6px;}
+    .admin-card-acoes { display: flex; gap: 8px; }
+    .btn { padding: 14px 20px; border-radius: 10px; font-weight: 600; font-size: 15px; cursor: pointer; border: none; transition: 0.2s; width: 100%; margin-bottom: 12px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2); }
+    .btn-primary:hover { background: #1e293b; }
+    .btn-secondary { background: var(--secondary); color: white; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3); }
+    .btn-secondary:hover { background: #d97706; }
+    .btn-success { background: var(--success); color: white; box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3); }
+    .btn-success:hover { background: #16a34a; }
+    .btn-outline { background: white; border: 2px solid #e2e8f0; color: #475569; }
+    .btn-outline:hover { background: #f8fafc; border-color: #cbd5e1; }
+    .btn-icon { padding: 10px; border-radius: 8px; font-size: 16px; width: auto; margin: 0; transition: 0.3s; }
+    .btn-edit { background: #e0f2fe; color: #0284c7; }
+    .btn-edit:hover { background: #bae6fd; }
+    .btn-delete { background: #fee2e2; color: var(--danger); }
+    .btn-delete:hover { background: #fecaca; }
+    input[type="text"], input[type="number"], select, textarea { width: 100%; padding: 14px; margin-bottom: 15px; border: 2px solid #e2e8f0; border-radius: 10px; box-sizing: border-box; font-size: 16px; font-family: inherit; background: white; color: #1e293b; transition: 0.3s; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--secondary); box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1); }
+    label { font-weight: 700; margin-bottom: 6px; display: block; font-size: 0.95rem; color: #475569; }
+    .d-none { display: none !important; }
+    textarea#codigoExport { height: 200px; font-family: monospace; font-size: 13px; background: #1e293b; color: #38bdf8; border: none; border-radius: 10px; padding: 15px; resize: vertical;}
+    .area-busca { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); margin-bottom: 20px; border: 1px solid #e2e8f0; }
+    .area-busca input { margin-bottom: 10px; }
+    .scroll-categorias { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px; white-space: nowrap; scrollbar-width: none; cursor: grab; }
+    .scroll-categorias:active { cursor: grabbing; }
+    .scroll-categorias::-webkit-scrollbar { display: none; }
+    .btn-categoria { background: white; border: 2px solid #e2e8f0; padding: 8px 18px; border-radius: 20px; font-weight: 600; font-size: 14px; color: #64748b; cursor: pointer; transition: all 0.3s; user-select: none; }
+    .btn-categoria:hover { border-color: #cbd5e1; color: var(--primary); }
+    .btn-categoria.ativa { background: var(--secondary); border-color: var(--secondary); color: white; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3); }
+    .empty-state { text-align: center; padding: 30px 10px; color: #94a3b8; font-weight: 500; }
+  </style>
+</head>
+<body>
+  <!-- MANTIDO O MESMO HTML DA VIEW -->
+  <div class="header-app">
+    <h1>🛠️ Painel Admin</h1>
+    <p>Gestão do Cardápio HarryLanches</p>
+  </div>
+
+  <div id="telaMenu" class="container">
+    <h2 style="color: #1e293b;">O que deseja gerenciar?</h2>
+    <button class="btn btn-primary" onclick="App.navegar('telaLanches'); App.Lanches.renderizarTudo();">🍔 Lanches e Porções</button>
+    <button class="btn btn-primary" onclick="App.navegar('telaAdicionais'); App.Adicionais.renderizar();">🥓 Adicionais</button>
+    <hr style="border: 0; height: 1px; background: #e2e8f0; margin: 25px 0;">
+    <button class="btn btn-success" onclick="App.Exportacao.preparar(); App.navegar('telaExportar');">💾 Salvar / Atualizar Site</button>
+  </div>
+
+  <div id="telaLanches" class="container d-none">
+    <button class="btn btn-outline" onclick="App.navegar('telaMenu')">⬅ Voltar ao Menu</button>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+      <h2 style="margin: 0;">Lanches Cadastrados</h2>
+      <button class="btn btn-secondary" style="width: auto; margin: 0; padding: 10px 15px;" onclick="App.Lanches.abrirForm()">+ Novo</button>
+    </div>
+    <div class="area-busca">
+      <input type="text" id="buscaLanche" placeholder="🔍 Buscar lanche..." oninput="App.Lanches.renderizarLista()">
+      <div id="menuCategoriasAdmin" class="scroll-categorias"></div>
+    </div>
+    <div id="listaLanchesContainer"></div>
+  </div>
+
+  <div id="telaFormLanche" class="container d-none">
+    <h2 id="tituloFormLanche">Novo Lanche</h2>
+    <input type="hidden" id="lancheId">
+    <label>Nome do Produto:</label>
+    <input type="text" id="lancheNome" placeholder="Ex: X-BURGUER">
+    <label>Preço (R$):</label>
+    <input type="number" id="lanchePreco" step="0.10" placeholder="Ex: 15.50">
+    <label>Categoria:</label>
+    <select id="lancheCategoria" onchange="App.Lanches.verificarNovaCategoria()"></select>
+    <input type="text" id="lancheNovaCategoria" class="d-none" placeholder="Digite a nova categoria (Ex: COMBOS)">
+    <div style="display: flex; gap: 10px; margin-top: 15px;">
+      <button class="btn btn-success" onclick="App.Lanches.salvar()">✔️ Salvar Produto</button>
+      <button class="btn btn-outline" onclick="App.navegar('telaLanches')">Cancelar</button>
+    </div>
+  </div>
+
+  <div id="telaAdicionais" class="container d-none">
+    <button class="btn btn-outline" onclick="App.navegar('telaMenu')">⬅ Voltar ao Menu</button>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+      <h2 style="margin: 0;">Adicionais</h2>
+      <button class="btn btn-secondary" style="width: auto; margin: 0; padding: 10px 15px;" onclick="App.Adicionais.abrirForm()">+ Novo</button>
+    </div>
+    <div id="listaAdicionaisContainer"></div>
+  </div>
+
+  <div id="telaFormAdicional" class="container d-none">
+    <h2 id="tituloFormAdicional">Novo Adicional</h2>
+    <input type="hidden" id="adicionalId">
+    <label>Nome do Adicional:</label>
+    <input type="text" id="adicionalNome" placeholder="Ex: BACON EXTRA">
+    <label>Preço (R$):</label>
+    <input type="number" id="adicionalPreco" step="0.10" placeholder="Ex: 4.00">
+    <div style="display: flex; gap: 10px; margin-top: 15px;">
+      <button class="btn btn-success" onclick="App.Adicionais.salvar()">✔️ Salvar Adicional</button>
+      <button class="btn btn-outline" onclick="App.navegar('telaAdicionais')">Cancelar</button>
+    </div>
+  </div>
+
+  <div id="telaExportar" class="container d-none">
+    <h2>Atualizar o Sistema</h2>
+    <p style="color: #64748b; line-height: 1.5;">Para aplicar as mudanças no site, baixe o arquivo atualizado e substitua o antigo no seu repositório.</p>
+    <button class="btn btn-success" onclick="App.Exportacao.baixar()" style="font-size: 18px; padding: 18px; margin-top: 10px;">⬇️ Baixar Produtos.js</button>
+    <p style="text-align: center; margin: 20px 0; font-weight: bold; color: #cbd5e1;">OU</p>
+    <p style="font-weight: 600;">Copie o código manualmente:</p>
+    <textarea id="codigoExport" readonly></textarea>
+    <button class="btn btn-outline" onclick="App.Exportacao.copiar()">📋 Copiar Código</button>
+    <button class="btn btn-primary" onclick="App.navegar('telaMenu')" style="margin-top: 25px;">⬅ Voltar ao Menu Inicial</button>
+  </div>
+
+  <script src="Produtos.js"></script>
+
+  <script>
+    /**
+     * ARQUITETURA MODULAR (CLEAN CODE)
+     * Isolamos o aplicativo em um namespace único (App) para evitar poluição global
+     * e separamos as responsabilidades.
+     */
+    const App = {
+      Estado: {
+        categoriaAtiva: ""
+      },
+
+      Util: {
+        // Formata strings, remove espaços em branco inúteis
+        sanitizarTexto: (txt) => txt ? txt.toString().trim().toUpperCase() : "",
+        // Converte para float seguro
+        sanitizarPreco: (val) => {
+          const num = parseFloat(val?.toString().replace(',', '.'));
+          return isNaN(num) || num < 0 ? 0 : num;
+        }
+      },
+
+      navegar: (idTela) => {
+        document.querySelectorAll('.container').forEach(t => t.classList.add('d-none'));
+        document.getElementById(idTela).classList.remove('d-none');
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      },
+
+      Lanches: {
+        renderizarTudo: () => {
+          App.Lanches.renderizarCategorias();
+          App.Lanches.renderizarLista();
+        },
+
+        renderizarCategorias: () => {
+          const container = document.getElementById('menuCategoriasAdmin');
+          // CORREÇÃO: Acessando 'dbProdutos' diretamente, sem o 'window.'
+          const categorias = [...new Set((dbProdutos || []).map(p => p.categoria || 'SEM CATEGORIA'))].sort();
+          
+          let html = `<button class="btn-categoria ${App.Estado.categoriaAtiva === '' ? 'ativa' : ''}" onclick="App.Lanches.filtrarCategoria('')">TUDO</button>`;
+          html += categorias.map(cat => 
+            `<button class="btn-categoria ${App.Estado.categoriaAtiva === cat ? 'ativa' : ''}" onclick="App.Lanches.filtrarCategoria('${cat}')">${cat}</button>`
+          ).join(''); 
+          
+          container.innerHTML = html;
+        },
+
+        filtrarCategoria: (cat) => {
+          App.Estado.categoriaAtiva = cat;
+          App.Lanches.renderizarTudo();
+        },
+
+        renderizarLista: () => {
+          const termo = document.getElementById('buscaLanche').value.toLowerCase();
+          const container = document.getElementById('listaLanchesContainer');
+          
+          // CORREÇÃO: Acessando 'dbProdutos' diretamente
+          const produtosFiltrados = (dbProdutos || []).map((prod, originalIndex) => ({...prod, originalIndex}))
+            .filter(prod => {
+              const bateTexto = prod.nome.toLowerCase().includes(termo) || (prod.categoria || '').toLowerCase().includes(termo);
+              const bateCategoria = App.Estado.categoriaAtiva === "" || prod.categoria === App.Estado.categoriaAtiva;
+              return bateTexto && bateCategoria;
+            });
+
+          if (produtosFiltrados.length === 0) {
+            container.innerHTML = `<div class="empty-state">Nenhum lanche encontrado. 🍔</div>`;
+            return;
+          }
+
+          container.innerHTML = produtosFiltrados.map(prod => `
+            <div class="admin-card">
+              <div class="admin-card-info">
+                <span class="admin-card-nome">${prod.nome}</span>
+                <span class="admin-card-detalhes">${prod.categoria || 'SEM CATEGORIA'} • <span class="admin-card-preco">R$ ${prod.preco.toFixed(2)}</span></span>
+              </div>
+              <div class="admin-card-acoes">
+                <button class="btn btn-icon btn-edit" onclick="App.Lanches.abrirForm(${prod.originalIndex})" title="Editar">✏️</button>
+                <button class="btn btn-icon btn-delete" onclick="App.Lanches.deletar(${prod.originalIndex})" title="Apagar">🗑️</button>
+              </div>
+            </div>
+          `).join('');
+        },
+
+        carregarCategoriasSelect: (selecionada = "") => {
+          const select = document.getElementById('lancheCategoria');
+          const categorias = [...new Set((dbProdutos || []).map(p => p.categoria || 'SEM CATEGORIA'))].sort();
+          
+          let html = '<option value="" disabled selected>Escolha uma categoria...</option>';
+          html += categorias.map(cat => `<option value="${cat}">${cat}</option>`).join('');
+          html += '<option value="NOVA" style="font-weight:bold; color:#f59e0b;">➕ CRIAR NOVA CATEGORIA</option>';
+          
+          select.innerHTML = html;
+          if (selecionada) select.value = selecionada;
+          App.Lanches.verificarNovaCategoria();
+        },
+
+        verificarNovaCategoria: () => {
+          const inputNovo = document.getElementById('lancheNovaCategoria');
+          if (document.getElementById('lancheCategoria').value === "NOVA") {
+            inputNovo.classList.remove('d-none');
+            inputNovo.focus();
+          } else {
+            inputNovo.classList.add('d-none');
+            inputNovo.value = "";
+          }
+        },
+
+        abrirForm: (index = null) => {
+          document.getElementById('lancheNovaCategoria').classList.add('d-none');
+          const isEdit = index !== null;
+          const prod = isEdit ? dbProdutos[index] : { nome: '', preco: '', categoria: '' };
+          
+          document.getElementById('tituloFormLanche').innerText = isEdit ? "Editar Produto" : "Novo Produto";
+          document.getElementById('lancheId').value = isEdit ? index : "";
+          document.getElementById('lancheNome').value = prod.nome;
+          document.getElementById('lanchePreco').value = prod.preco;
+          
+          App.Lanches.carregarCategoriasSelect(prod.categoria);
+          App.navegar('telaFormLanche');
+        },
+
+        salvar: () => {
+          const id = document.getElementById('lancheId').value;
+          const nome = App.Util.sanitizarTexto(document.getElementById('lancheNome').value);
+          const preco = App.Util.sanitizarPreco(document.getElementById('lanchePreco').value);
+          
+          let categoria = document.getElementById('lancheCategoria').value;
+          if (categoria === "NOVA") {
+            categoria = App.Util.sanitizarTexto(document.getElementById('lancheNovaCategoria').value);
+          }
+
+          if (!nome || preco === 0 || !categoria) {
+             return alert("❌ Erro: Preencha todos os campos corretamente. O preço deve ser maior que 0.");
+          }
+
+          const novoProduto = { nome, preco, categoria };
+          
+          if (id !== "") dbProdutos[id] = novoProduto;
+          else dbProdutos.push(novoProduto);
+
+          App.navegar('telaLanches');
+          App.Lanches.renderizarTudo();
+        },
+
+        deletar: (index) => {
+          if(confirm(`Tem certeza que deseja apagar "${dbProdutos[index].nome}"?`)) {
+            dbProdutos.splice(index, 1);
+            App.Lanches.renderizarTudo();
+          }
+        }
+      },
+
+      Adicionais: {
+        renderizar: () => {
+          const container = document.getElementById('listaAdicionaisContainer');
+          // CORREÇÃO: Verificando se dbAdicionais existe de forma segura
+          if(typeof dbAdicionais === 'undefined' || dbAdicionais.length === 0) {
+            container.innerHTML = `<div class="empty-state">Nenhum adicional cadastrado. 🥓</div>`;
+            return;
+          }
+          
+          container.innerHTML = dbAdicionais.map((add, index) => `
+            <div class="admin-card">
+              <div class="admin-card-info">
+                <span class="admin-card-nome">${add.nome}</span>
+                <span class="admin-card-preco">R$ ${add.preco.toFixed(2)}</span>
+              </div>
+              <div class="admin-card-acoes">
+                <button class="btn btn-icon btn-edit" onclick="App.Adicionais.abrirForm(${index})">✏️</button>
+                <button class="btn btn-icon btn-delete" onclick="App.Adicionais.deletar(${index})">🗑️</button>
+              </div>
+            </div>
+          `).join('');
+        },
+
+        abrirForm: (index = null) => {
+          const isEdit = index !== null;
+          const add = isEdit ? dbAdicionais[index] : { nome: '', preco: '' };
+          
+          document.getElementById('tituloFormAdicional').innerText = isEdit ? "Editar Adicional" : "Novo Adicional";
+          document.getElementById('adicionalId').value = isEdit ? index : "";
+          document.getElementById('adicionalNome').value = add.nome;
+          document.getElementById('adicionalPreco').value = add.preco;
+          
+          App.navegar('telaFormAdicional');
+        },
+
+        salvar: () => {
+          const id = document.getElementById('adicionalId').value;
+          const nome = App.Util.sanitizarTexto(document.getElementById('adicionalNome').value);
+          const preco = App.Util.sanitizarPreco(document.getElementById('adicionalPreco').value);
+          
+          if (!nome || preco === 0) return alert("❌ Erro: Preencha todos os campos corretamente.");
+          
+          const novoAdicional = { nome, preco };
+          if (id !== "") dbAdicionais[id] = novoAdicional; 
+          else dbAdicionais.push(novoAdicional); 
+
+          App.navegar('telaAdicionais');
+          App.Adicionais.renderizar();
+        },
+
+        deletar: (index) => {
+          if(confirm(`Tem certeza que deseja apagar "${dbAdicionais[index].nome}"?`)) {
+            dbAdicionais.splice(index, 1);
+            App.Adicionais.renderizar();
+          }
+        }
+      },
+
+      Exportacao: {
+        gerarCodigo: () => {
+          const configExport = {
+             produtos: typeof dbProdutos !== 'undefined' ? dbProdutos : [],
+             adicionais: typeof dbAdicionais !== 'undefined' ? dbAdicionais : []
+          };
+          
+          return `// Arquivo gerado automaticamente pelo Painel Admin\n\n` +
+                 `const dbProdutos = ${JSON.stringify(configExport.produtos, null, 4)};\n\n` +
+                 `const dbAdicionais = ${JSON.stringify(configExport.adicionais, null, 4)};\n`;
+        },
+
+        preparar: () => {
+          document.getElementById('codigoExport').value = App.Exportacao.gerarCodigo();
+        },
+
+        baixar: () => {
+          const codigo = App.Exportacao.gerarCodigo();
+          const blob = new Blob([codigo], { type: 'application/javascript' });
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(blob);
+          link.download = 'Produtos.js';
+          link.click();
+          URL.revokeObjectURL(link.href);
+        },
+
+        copiar: () => {
+          const textarea = document.getElementById('codigoExport');
+          textarea.select();
+          document.execCommand('copy');
+          alert('✅ Código copiado com sucesso!');
+        }
+      },
+
+      Interface: {
+        iniciarRolagemPC: () => {
+          const menuCat = document.getElementById('menuCategoriasAdmin');
+          let isDown = false; let startX; let scrollLeft;
+          menuCat.addEventListener('mousedown', (e) => { isDown = true; startX = e.pageX - menuCat.offsetLeft; scrollLeft = menuCat.scrollLeft; });
+          menuCat.addEventListener('mouseleave', () => { isDown = false; });
+          menuCat.addEventListener('mouseup', () => { isDown = false; });
+          menuCat.addEventListener('mousemove', (e) => {
+            if(!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - menuCat.offsetLeft;
+            menuCat.scrollLeft = scrollLeft - (x - startX) * 2; 
+          });
+          menuCat.addEventListener('wheel', (evt) => { evt.preventDefault(); menuCat.scrollLeft += evt.deltaY; });
+        }
+      },
+
+      Bootstrap: () => {
+        // Agora ele puxa com segurança as variáveis "const" do seu Produtos.js
+        if (typeof dbProdutos !== 'undefined' && typeof dbAdicionais !== 'undefined') {
+            App.Lanches.renderizarTudo();
+            App.Interface.iniciarRolagemPC();
+        } else {
+            console.warn("⏳ Aguardando montagem do banco estático...");
+            setTimeout(App.Bootstrap, 500); 
+        }
+      }
+    };
+
+    // Inicialização segura
+    window.onload = App.Bootstrap;
+  </script>
+</body>
+</html>
