@@ -1,147 +1,620 @@
+// Arquivo gerado automaticamente pelo Painel Admin
+
 const dbProdutos = [
-    // --- LANCHES ---
-    { nome: "AMERICANO", preco: 8.0, categoria: "LANCHES" },
-    { nome: "BACON", preco: 14.0, categoria: "LANCHES" },
-    { nome: "BARBECUE + 2 QUEIJOS", preco: 14.0, categoria: "LANCHES" },
-    { nome: "BARBECUE DA CASA", preco: 19.0, categoria: "LANCHES" },
-    { nome: "CALABRESA", preco: 14.0, categoria: "LANCHES" },
-    { nome: "CASEIRO", preco: 14.0, categoria: "LANCHES" },
-    { nome: "CASEIRO 2 QUEIJOS", preco: 19.0, categoria: "LANCHES" },
-    { nome: "CHEDDAR BACON", preco: 16.0, categoria: "LANCHES" },
-    { nome: "CHEDDAR BOVINO", preco: 12.0, categoria: "LANCHES" },
-    { nome: "CHEDDAR CALABRESA", preco: 16.0, categoria: "LANCHES" },
-    { nome: "CHEDDAR COMPLETO", preco: 19.0, categoria: "LANCHES" },
-    { nome: "CHURRASQUINHO", preco: 20.0, categoria: "LANCHES" },
-    { nome: "COMPLETO", preco: 17.0, categoria: "LANCHES" },
-    { nome: "ESPECIAL DE FRANGO", preco: 19.0, categoria: "LANCHES" },
-    { nome: "ESPECIAL DE FRANGO COM CATUPIRY", preco: 20.0, categoria: "LANCHES" },
-    { nome: "FILÉ BOVINO ACEBOLADO", preco: 20.0, categoria: "LANCHES" },
-    { nome: "FILÉ DE FRANGO ACEBOLADO", preco: 16.0, categoria: "LANCHES" },
-    { nome: "FILÉ MISTO ACEBOLADO", preco: 24.0, categoria: "LANCHES" },
-    { nome: "FRANGÃO", preco: 15.0, categoria: "LANCHES" },
-    { nome: "FRANGO CATUPIRY", preco: 13.0, categoria: "LANCHES" },
-    { nome: "FRANGUINHO", preco: 12.0, categoria: "LANCHES" },
-    { nome: "CORAÇÃO ACEBOLADO", preco: 16.0, categoria: "LANCHES" },
-    { nome: "EGGS BACON", preco: 15.0, categoria: "LANCHES" },
-    { nome: "EGGS BOVINO", preco: 11.0, categoria: "LANCHES" },
-    { nome: "EGGS BURGUER BOVINO", preco: 14.0, categoria: "LANCHES" },
-    { nome: "EGGS CALABRESA", preco: 16.0, categoria: "LANCHES" },
-    { nome: "EGGS COMPLETO", preco: 18.0, categoria: "LANCHES" },
-    { nome: "EMPANADINHO", preco: 17.0, categoria: "LANCHES" },
-    { nome: "HAMBÚRGUER BOVINO", preco: 9.0, categoria: "LANCHES" },
-    { nome: "HAMBÚRGUER GOURMET BACON", preco: 18.0, categoria: "LANCHES" },
-    { nome: "HAMBÚRGUER GOURMET BARBECUE", preco: 19.0, categoria: "LANCHES" },
-    { nome: "HAMBÚRGUER GOURMET CALABRESA", preco: 18.0, categoria: "LANCHES" },
-    { nome: "HAMBÚRGUER GOURMET CATUPIRY", preco: 16.0, categoria: "LANCHES" },
-    { nome: "HAMBÚRGUER GOURMET CHEDDAR", preco: 16.0, categoria: "LANCHES" },
-    { nome: "HAMBÚRGUER GOURMET EGGS BARBECUE", preco: 17.0, categoria: "LANCHES" },
-    { nome: "HAMBÚRGUER GOURMET PRATO", preco: 17.0, categoria: "LANCHES" },
-    { nome: "HAMBÚRGUER GOURMET PUNCH", preco: 20.0, categoria: "LANCHES" },
-    { nome: "HAMBÚRGUER GOURMET TENTAÇÃO", preco: 19.0, categoria: "LANCHES" },
-    { nome: "HAMBÚRGUER GOURMET TRIPLO", preco: 23.0, categoria: "LANCHES" },
-    { nome: "LAMPIÃO", preco: 27.0, categoria: "LANCHES" },
-    { nome: "MANIA DO CLIENTE", preco: 18.0, categoria: "LANCHES" },
-    { nome: "MARIA BONITA", preco: 17.0, categoria: "LANCHES" },
-    { nome: "MISTÃO DA CASA ACEBOLADO", preco: 30.0, categoria: "LANCHES" },
-    { nome: "MISTO", preco: 7.0, categoria: "LANCHES" },
-    { nome: "MODA DA CASA", preco: 19.0, categoria: "LANCHES" },
-    { nome: "PICANHA", preco: 17.0, categoria: "LANCHES" },
-    { nome: "SERGIPANO", preco: 19.0, categoria: "LANCHES" },
-    { nome: "TUDÃO", preco: 23.0, categoria: "LANCHES" },
-    { nome: "TUDINHO", preco: 20.0, categoria: "LANCHES" },
-    { nome: "UNIVERSITÁRIO", preco: 17.0, categoria: "LANCHES" },
-    { nome: "X-BURGUER BOVINO", preco: 13.0, categoria: "LANCHES" },
-    { nome: "X-TOSCANA", preco: 18.0, categoria: "LANCHES" },
-
-    // --- PORÇÕES ---
-    { nome: "PORÇÃO BATATA FRITA", preco: 17.0, categoria: "PORÇÕES" },
-
-    // --- CUSCUZ ---
-    { nome: "CUSCUZ - CREMOSO DE BACON", preco: 17.0, categoria: "CUSCUZ" },
-    { nome: "CUSCUZ - CREMOSO DE CALABRESA", preco: 17.0, categoria: "CUSCUZ" },
-    { nome: "CUSCUZ - CREMOSO DE CARNE DE SOL", preco: 17.0, categoria: "CUSCUZ" },
-    { nome: "CUSCUZ - CREMOSO DE FRANGO", preco: 17.0, categoria: "CUSCUZ" },
-    { nome: "CUSCUZ - CREMOSO DE PEITO DE PERU", preco: 17.0, categoria: "CUSCUZ" },
-    { nome: "CUSCUZ - CREMOSO MISTO", preco: 17.0, categoria: "CUSCUZ" },
-
-    // --- TAPIOCAS ---
-    { nome: "TAPIOCA DE CARNE DE SOL", preco: 14.0, categoria: "TAPIOCAS" },
-    { nome: "TAPIOCA DE FRANGO", preco: 14.0, categoria: "TAPIOCAS" },
-    { nome: "TAPIOCA MISTA", preco: 14.0, categoria: "TAPIOCAS" },
-
-    // --- NATURAIS ---
-    { nome: "NATURAL - PATÊ DE ATUM", preco: 13.0, categoria: "NATURAIS" },
-    { nome: "NATURAL - PATÊ DE FRANGO", preco: 13.0, categoria: "NATURAIS" },
-    { nome: "NATURAL - PEITO DE PERU", preco: 13.0, categoria: "NATURAIS" },
-    { nome: "NATURAL - PERUZINHO", preco: 9.0, categoria: "NATURAIS" },
-    { nome: "NATURAL - QUEIJO PRATO", preco: 9.0, categoria: "NATURAIS" },
-
-    // --- KIDS ---
-    { nome: "KIDS - BATMAN", preco: 9.0, categoria: "KIDS" },
-    { nome: "KIDS - HOMEM-ARANHA", preco: 9.0, categoria: "KIDS" },
-    { nome: "KIDS - HULK", preco: 14.0, categoria: "KIDS" },
-    { nome: "KIDS - WOLVERINE", preco: 8.0, categoria: "KIDS" },
-
-    // --- TORTAS E DOCES ---
-    { nome: "CONE BIS", preco: 11.0, categoria: "TORTAS E DOCES" },
-    { nome: "CONE BRIGADEIRO", preco: 11.0, categoria: "TORTAS E DOCES" },
-    { nome: "CONE NINHO", preco: 11.0, categoria: "TORTAS E DOCES" },
-    { nome: "MORANGO NO LANCE", preco: 7.0, categoria: "TORTAS E DOCES" },
-    { nome: "TORTA CHOCOLATE", preco: 11.0, categoria: "TORTAS E DOCES" },
-    { nome: "TORTA MARACUJA", preco: 11.0, categoria: "TORTAS E DOCES" },
-    { nome: "TORTA NINHO C/ MORANGO", preco: 11.0, categoria: "TORTAS E DOCES" },
-
-    // --- BEBIDAS ---
-    { nome: "ÁGUA C/ GÁS", preco: 4.0, categoria: "BEBIDAS" },
-    { nome: "ÁGUA DE COCO 400ML", preco: 6.0, categoria: "BEBIDAS" },
-    { nome: "ÁGUA S/ GÁS", preco: 3.0, categoria: "BEBIDAS" },
-    { nome: "BUDWEISER 343 ML", preco: 8.0, categoria: "BEBIDAS" },
-    { nome: "CAIPIRINHA", preco: 10.0, categoria: "BEBIDAS" },
-    { nome: "COCA 1L", preco: 10.0, categoria: "BEBIDAS" },
-    { nome: "COCA 2L", preco: 15.0, categoria: "BEBIDAS" },
-    { nome: "COCA LATA", preco: 6.0, categoria: "BEBIDAS" },
-    { nome: "COCA ZERO", preco: 6.0, categoria: "BEBIDAS" },
-    { nome: "ENERGÉTICO CLOROFILA", preco: 7.0, categoria: "BEBIDAS" },
-    { nome: "FANTA LATA", preco: 6.0, categoria: "BEBIDAS" },
-    { nome: "GUARANA 1L", preco: 10.0, categoria: "BEBIDAS" },
-    { nome: "GUARANA LATA", preco: 6.0, categoria: "BEBIDAS" },
-    { nome: "HEINEKEN 330 ML", preco: 10.0, categoria: "BEBIDAS" },
-    { nome: "RED BULL LATA", preco: 14.0, categoria: "BEBIDAS" },
-    { nome: "SKOL LATA 350 ML", preco: 5.0, categoria: "BEBIDAS" },
-    { nome: "SUCO ACEROLA (400ML)", preco: 7.0, categoria: "BEBIDAS" },
-    { nome: "SUCO AMEIXA (400ML)", preco: 7.0, categoria: "BEBIDAS" },
-    { nome: "SUCO CACAU (400ML)", preco: 7.0, categoria: "BEBIDAS" },
-    { nome: "SUCO GRAVIOLA (400ML)", preco: 7.0, categoria: "BEBIDAS" },
-    { nome: "SUCO LARANJA (400ML)", preco: 7.0, categoria: "BEBIDAS" },
-    { nome: "SUCO MANGABA (400ML)", preco: 7.0, categoria: "BEBIDAS" },
-    { nome: "SUCO MARACUJÁ (400ML)", preco: 7.0, categoria: "BEBIDAS" },
-    { nome: "SUCO MORANGO (400ML)", preco: 7.0, categoria: "BEBIDAS" },
-    { nome: "SUCO UMBU (400ML)", preco: 7.0, categoria: "BEBIDAS" },
-    { nome: "VINHO PERGOLA 1L", preco: 40.0, categoria: "BEBIDAS" },
-    { nome: "VINHO QUINTA DO MORAGADO (750ML)", preco: 30.0, categoria: "BEBIDAS" }
+    {
+        "nome": "AMERICANO",
+        "preco": 8,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "BACON",
+        "preco": 14,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "BARBECUE + 2 QUEIJOS",
+        "preco": 14,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "BARBECUE DA CASA",
+        "preco": 19,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "CALABRESA",
+        "preco": 14,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "CASEIRO",
+        "preco": 14,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "CASEIRO 2 QUEIJOS",
+        "preco": 19,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "CHEDDAR BACON",
+        "preco": 16,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "CHEDDAR BOVINO",
+        "preco": 12,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "CHEDDAR CALABRESA",
+        "preco": 16,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "CHEDDAR COMPLETO",
+        "preco": 19,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "CHURRASQUINHO",
+        "preco": 20,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "COMPLETO",
+        "preco": 17,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "ESPECIAL DE FRANGO",
+        "preco": 19,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "ESPECIAL DE FRANGO COM CATUPIRY",
+        "preco": 20,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "FILÉ BOVINO ACEBOLADO",
+        "preco": 20,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "FILÉ DE FRANGO ACEBOLADO",
+        "preco": 16,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "FILÉ MISTO ACEBOLADO",
+        "preco": 24,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "FRANGÃO",
+        "preco": 15,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "FRANGO CATUPIRY",
+        "preco": 13,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "FRANGUINHO",
+        "preco": 12,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "CORAÇÃO ACEBOLADO",
+        "preco": 16,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "EGGS BACON",
+        "preco": 15,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "EGGS BOVINO",
+        "preco": 11,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "EGGS BURGUER BOVINO",
+        "preco": 14,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "EGGS CALABRESA",
+        "preco": 16,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "EGGS COMPLETO",
+        "preco": 18,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "EMPANADINHO",
+        "preco": 17,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "HAMBÚRGUER BOVINO",
+        "preco": 9,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "HAMBÚRGUER GOURMET BACON",
+        "preco": 18,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "HAMBÚRGUER GOURMET BARBECUE",
+        "preco": 19,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "HAMBÚRGUER GOURMET CALABRESA",
+        "preco": 18,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "HAMBÚRGUER GOURMET CATUPIRY",
+        "preco": 16,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "HAMBÚRGUER GOURMET CHEDDAR",
+        "preco": 16,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "HAMBÚRGUER GOURMET EGGS BARBECUE",
+        "preco": 17,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "HAMBÚRGUER GOURMET PRATO",
+        "preco": 17,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "HAMBÚRGUER GOURMET PUNCH",
+        "preco": 20,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "HAMBÚRGUER GOURMET TENTAÇÃO",
+        "preco": 19,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "HAMBÚRGUER GOURMET TRIPLO",
+        "preco": 23,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "LAMPIÃO",
+        "preco": 27,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "MANIA DO CLIENTE",
+        "preco": 18,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "MARIA BONITA",
+        "preco": 17,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "MISTÃO DA CASA ACEBOLADO",
+        "preco": 30,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "MISTO",
+        "preco": 7,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "MODA DA CASA",
+        "preco": 19,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "PICANHA",
+        "preco": 17,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "SERGIPANO",
+        "preco": 19,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "TUDÃO",
+        "preco": 23,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "TUDINHO",
+        "preco": 20,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "UNIVERSITÁRIO",
+        "preco": 17,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "X-BURGUER BOVINO",
+        "preco": 13,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "X-TOSCANA",
+        "preco": 18,
+        "categoria": "LANCHES"
+    },
+    {
+        "nome": "PORÇÃO BATATA FRITA",
+        "preco": 17,
+        "categoria": "PORÇÕES"
+    },
+    {
+        "nome": "CUSCUZ - CREMOSO DE BACON",
+        "preco": 17,
+        "categoria": "CUSCUZ"
+    },
+    {
+        "nome": "CUSCUZ - CREMOSO DE CALABRESA",
+        "preco": 17,
+        "categoria": "CUSCUZ"
+    },
+    {
+        "nome": "CUSCUZ - CREMOSO DE CARNE DE SOL",
+        "preco": 17,
+        "categoria": "CUSCUZ"
+    },
+    {
+        "nome": "CUSCUZ - CREMOSO DE FRANGO",
+        "preco": 17,
+        "categoria": "CUSCUZ"
+    },
+    {
+        "nome": "CUSCUZ - CREMOSO DE PEITO DE PERU",
+        "preco": 17,
+        "categoria": "CUSCUZ"
+    },
+    {
+        "nome": "CUSCUZ - CREMOSO MISTO",
+        "preco": 17,
+        "categoria": "CUSCUZ"
+    },
+    {
+        "nome": "TAPIOCA DE CARNE DE SOL",
+        "preco": 14,
+        "categoria": "TAPIOCAS"
+    },
+    {
+        "nome": "TAPIOCA DE FRANGO",
+        "preco": 14,
+        "categoria": "TAPIOCAS"
+    },
+    {
+        "nome": "TAPIOCA MISTA",
+        "preco": 14,
+        "categoria": "TAPIOCAS"
+    },
+    {
+        "nome": "NATURAL - PATÊ DE ATUM",
+        "preco": 13,
+        "categoria": "NATURAIS"
+    },
+    {
+        "nome": "NATURAL - PATÊ DE FRANGO",
+        "preco": 13,
+        "categoria": "NATURAIS"
+    },
+    {
+        "nome": "NATURAL - PEITO DE PERU",
+        "preco": 13,
+        "categoria": "NATURAIS"
+    },
+    {
+        "nome": "NATURAL - PERUZINHO",
+        "preco": 9,
+        "categoria": "NATURAIS"
+    },
+    {
+        "nome": "NATURAL - QUEIJO PRATO",
+        "preco": 9,
+        "categoria": "NATURAIS"
+    },
+    {
+        "nome": "KIDS - BATMAN",
+        "preco": 9,
+        "categoria": "KIDS"
+    },
+    {
+        "nome": "KIDS - HOMEM-ARANHA",
+        "preco": 9,
+        "categoria": "KIDS"
+    },
+    {
+        "nome": "KIDS - HULK",
+        "preco": 14,
+        "categoria": "KIDS"
+    },
+    {
+        "nome": "KIDS - WOLVERINE",
+        "preco": 8,
+        "categoria": "KIDS"
+    },
+    {
+        "nome": "CONE BIS",
+        "preco": 11,
+        "categoria": "TORTAS E DOCES"
+    },
+    {
+        "nome": "CONE BRIGADEIRO",
+        "preco": 11,
+        "categoria": "TORTAS E DOCES"
+    },
+    {
+        "nome": "CONE NINHO",
+        "preco": 11,
+        "categoria": "TORTAS E DOCES"
+    },
+    {
+        "nome": "MORANGO NO LANCE",
+        "preco": 7,
+        "categoria": "TORTAS E DOCES"
+    },
+    {
+        "nome": "TORTA CHOCOLATE",
+        "preco": 11,
+        "categoria": "TORTAS E DOCES"
+    },
+    {
+        "nome": "TORTA MARACUJA",
+        "preco": 11,
+        "categoria": "TORTAS E DOCES"
+    },
+    {
+        "nome": "TORTA NINHO C/ MORANGO",
+        "preco": 11,
+        "categoria": "TORTAS E DOCES"
+    },
+    {
+        "nome": "ÁGUA C/ GÁS",
+        "preco": 4,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "ÁGUA DE COCO 400ML",
+        "preco": 6,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "ÁGUA S/ GÁS",
+        "preco": 3,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "BUDWEISER 343 ML",
+        "preco": 8,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "CAIPIRINHA",
+        "preco": 10,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "COCA 1L",
+        "preco": 10,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "COCA 2L",
+        "preco": 15,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "COCA LATA",
+        "preco": 6,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "COCA ZERO",
+        "preco": 6,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "ENERGÉTICO CLOROFILA",
+        "preco": 7,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "FANTA LATA",
+        "preco": 6,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "GUARANA 1L",
+        "preco": 10,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "GUARANA LATA",
+        "preco": 6,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "HEINEKEN 330 ML",
+        "preco": 10,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "RED BULL LATA",
+        "preco": 14,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "SKOL LATA 350 ML",
+        "preco": 5,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "SUCO ACEROLA (400ML)",
+        "preco": 7,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "SUCO AMEIXA (400ML)",
+        "preco": 7,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "SUCO CACAU (400ML)",
+        "preco": 7,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "SUCO GRAVIOLA (400ML)",
+        "preco": 7,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "SUCO LARANJA (400ML)",
+        "preco": 7,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "SUCO MANGABA (400ML)",
+        "preco": 7,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "SUCO MARACUJÁ (400ML)",
+        "preco": 7,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "SUCO MORANGO (400ML)",
+        "preco": 7,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "SUCO UMBU (400ML)",
+        "preco": 7,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "VINHO PERGOLA 1L",
+        "preco": 40,
+        "categoria": "BEBIDAS"
+    },
+    {
+        "nome": "VINHO QUINTA DO MORAGADO (750ML)",
+        "preco": 30,
+        "categoria": "BEBIDAS"
+    }
 ];
 
 const dbAdicionais = [
-    { nome: "AZEITONA", preco: 2.0 },
-    { nome: "BACON", preco: 4.0 },
-    { nome: "CALABRESA", preco: 4.0 },
-    { nome: "CANER DO SOL", preco: 4.0 },
-    { nome: "CARNE GOUMET", preco: 6.0 },
-    { nome: "CARNE TRADICIONAL", preco: 3.0 },
-    { nome: "CATUPIRY", preco: 2.0 },
-    { nome: "CEBOLA CARAMELIZADA", preco: 2.0 },
-    { nome: "CHEDDAR", preco: 2.0 },
-    { nome: "FRANGO DESFIADO", preco: 4.0 },
-    { nome: "KETCHUP", preco: 0.5 },
-    { nome: "MAIONESE", preco: 0.5 },
-    { nome: "MILHO E ERVILHA", preco: 2.0 },
-    { nome: "MOLHO BARBECUE", preco: 2.0 },
-    { nome: "MOLHO DA CASA", preco: 2.0 },
-    { nome: "MOSTARDA", preco: 0.5 },
-    { nome: "OVO", preco: 2.0 },
-    { nome: "PRESUNTO", preco: 1.0 },
-    { nome: "QUEIJO", preco: 1.0 },
-    { nome: "SALADA", preco: 2.0 },
-    { nome: "COPO DESCARTAVEL", preco: 0.5 },
-    { nome: "TALHER", preco: 0.5 }
+    {
+        "nome": "AZEITONA",
+        "preco": 2
+    },
+    {
+        "nome": "BACON",
+        "preco": 4
+    },
+    {
+        "nome": "CALABRESA",
+        "preco": 4
+    },
+    {
+        "nome": "CARNE DE SOL",
+        "preco": 4
+    },
+    {
+        "nome": "CARNE GOUMET",
+        "preco": 6
+    },
+    {
+        "nome": "CARNE TRADICIONAL",
+        "preco": 3
+    },
+    {
+        "nome": "CATUPIRY",
+        "preco": 2
+    },
+    {
+        "nome": "CEBOLA CARAMELIZADA",
+        "preco": 2
+    },
+    {
+        "nome": "CHEDDAR",
+        "preco": 2
+    },
+    {
+        "nome": "FRANGO DESFIADO",
+        "preco": 4
+    },
+    {
+        "nome": "KETCHUP",
+        "preco": 0.5
+    },
+    {
+        "nome": "MAIONESE",
+        "preco": 0.5
+    },
+    {
+        "nome": "MILHO E ERVILHA",
+        "preco": 2
+    },
+    {
+        "nome": "MOLHO BARBECUE",
+        "preco": 2
+    },
+    {
+        "nome": "MOLHO DA CASA",
+        "preco": 2
+    },
+    {
+        "nome": "MOSTARDA",
+        "preco": 0.5
+    },
+    {
+        "nome": "OVO",
+        "preco": 2
+    },
+    {
+        "nome": "PRESUNTO",
+        "preco": 1
+    },
+    {
+        "nome": "QUEIJO",
+        "preco": 1
+    },
+    {
+        "nome": "SALADA",
+        "preco": 2
+    },
+    {
+        "nome": "COPO DESCARTAVEL",
+        "preco": 0.5
+    },
+    {
+        "nome": "TALHER",
+        "preco": 0.5
+    }
 ];
