@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🍔COMANDA GARÇOM🍔</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="PainelGarsonStyle.css" />
+  </head>
+
+  <body>
+    <!-- INTERFACE DO APLICATIVO -->
+    <div id="appInterface">
+      <div class="header-app">
+        <h1>🍔COMANDA GARÇOM🍔</h1>
+      </div>
+
+      <!-- Tela Inicial: Carrinho/Resumo -->
+      <div id="telaCarrinho" class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <h2 style="margin: 0;">Pedido Atual</h2>
+          <span id="valorTotalHeader" style="font-weight: 700; color: #f59e0b; font-size: 1.2rem;">R$ 0,00</span>
+        </div>
+        
+        <div id="itensCarrinho"></div>
+        <button class="btn-acao" onclick="carregarListaProdutos()">
+          + Adicionar Lanche
+        </button>
+        <button class="btn-acao btn-finalizar-pedido" onclick="mostrarTela('telaFinalizar')">
+          Avançar para Impressão 🖨️
+        </button>
+      </div>
+      
+      <!-- Tela de Fechamento Automático (Mantida) -->
+      <div id="telaFechado" class="container" style="display: none; text-align: center; margin-top: 50px;">
+        <h1 style="font-size: 3rem; margin-bottom: 10px;">🌙</h1>
+        <h2 style="color: var(--primary);">Caixa Fechado</h2>
+        <p style="color: #64748b; font-size: 16px; margin-top: 15px;">
+          Expediente das <b>17:30 às 23:30</b>.
+        </p>
+      </div>
+      
+      <!-- Tela de Produtos -->
+      <div id="telaProdutos" class="container" style="display: none">
+        <button class="btn-voltar" onclick="mostrarTela('telaCarrinho')">
+          ⬅ Voltar para a Comanda
+        </button>
+        <h2>Lanches e Produtos</h2>
+        
+        <div class="area-fixa-busca">
+          <input type="text" id="inputBusca" placeholder="🔍 Buscar lanche..." oninput="filtrarProdutos()" />
+          <div id="menuCategorias" class="scroll-categorias"></div>
+        </div>
+
+        <div id="listaProdutos"></div>
+      </div>
+
+      <!-- Tela de Adicionais -->
+      <div id="telaAdicionais" class="container" style="display: none">
+        <button class="btn-voltar" onclick="mostrarTela('telaProdutos')">
+          ⬅ Voltar aos Lanches
+        </button>
+        <h2>Adicionais e Observações</h2>
+
+        <div id="listaAdicionaisSelecionados" class="box-selecionados">
+          <small>Adicionais: Nenhum</small>
+        </div>
+
+        <textarea id="inputObservacao" placeholder="Ex: Sem cebola, bem passado..."></textarea>
+
+        <div class="botoes-lado-a-lado">
+          <button class="btn-acao" onclick="finalizarItem()" style="background: #25d366; flex: 1">
+            Confirmar
+          </button>
+          <button class="btn-acao" onclick="mostrarTela('telaProdutos')" style="background: #ff4444; flex: 1">
+            Cancelar
+          </button>
+        </div>
+        <input type="text" id="inputBuscaAdicionais" placeholder="🔍 Buscar adicional..." oninput="filtrarAdicionais()" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ccc;">
+        
+        <div id="listaAdicionais"></div>
+      </div>
+      
+      <!-- Tela Finalizar (Adaptada para o Garçom) -->
+      <div id="telaFinalizar" class="container" style="display: none">
+        <h2>Dados da Comanda</h2>
+        
+        <!-- Novos Campos Específicos -->
+        <input type="text" id="inputMesa" placeholder="Mesa ou Nome (Ex: Mesa 05, Balcão, João)" />
+        
+        <select id="selectConsumo">
+          <option value="Comer no Local">🍽️ Comer no Local</option>
+          <option value="Para Levar">🛍️ Para Levar</option>
+        </select>
+
+        <textarea id="inputObsGeral" placeholder="Observação Geral (Ex: Entregar bebidas primeiro)"></textarea>
+
+        <div id="containerValorTotal" class="box-valor-total">
+          <div>
+            Total da Comanda:
+            <strong id="valorTotalFinalizar" style="color: var(--primary); font-size: 18px">R$ 0,00</strong>
+          </div>
+          <div id="statusPagamento" style="font-size: 14px; margin-top: 5px; color: #ff4444; font-weight: bold;">
+            Falta informar: R$ 0,00
+          </div>
+        </div>
+
+        <h3 style="font-size: 14px; margin-bottom: 8px">Status do Pagamento (Opcional p/ Fechamento):</h3>
+        <div class="pagamento-container-vertical">
+          <div class="pagamento-linha">
+            <label><input type="checkbox" id="checkDinheiro" value="Dinheiro" onchange="togglePagamento('Dinheiro')" /> Dinheiro</label>
+            <input type="number" id="valorDinheiro" class="input-pgto" placeholder="R$ 0,00" style="display: none" oninput="calcularFalta()" />
+          </div>
+          <div class="pagamento-linha">
+            <label><input type="checkbox" id="checkPix" value="Pix" onchange="togglePagamento('Pix')" /> Pix</label>
+            <input type="number" id="valorPix" class="input-pgto" placeholder="R$ 0,00" style="display: none" oninput="calcularFalta()" />
+          </div>
+          <div class="pagamento-linha">
+            <label><input type="checkbox" id="checkCartao" value="Cartão" onchange="togglePagamento('Cartao')" /> Cartão</label>
+            <input type="number" id="valorCartao" class="input-pgto" placeholder="R$ 0,00" style="display: none" oninput="calcularFalta()" />
+          </div>
+        </div>
+
+        <div id="containerTroco" style="display: none">
+          <strong style="display: block; font-size: 14px; margin-bottom: 5px">Troco para:</strong>
+          <input type="number" id="inputTroco" placeholder="Valor recebido em dinheiro" oninput="calcularTroco()" style="margin-bottom: 8px" />
+          <p id="exibicaoTroco" style="font-weight: bold; color: #25d366; margin-top: 5px"></p>
+          <label style="display: flex; align-items: center; gap: 5px; font-size: 14px; cursor: pointer;">
+            <input type="checkbox" id="checkboxSemTroco" onchange="toggleTrocoTexto()" /> Sem troco
+          </label>
+        </div>
+
+        <button class="btn-acao" style="background: #25d366; margin-top: 10px" onclick="imprimirComanda()">
+          🖨️ Imprimir Comanda
+        </button>
+        <button class="btn-voltar" style="margin-top: 10px" onclick="limparComanda()">
+          🗑️ Nova Comanda (Limpar Tudo)
+        </button>
+        <button class="btn-voltar" onclick="mostrarTela('telaCarrinho')">
+          Voltar à Comanda
+        </button>
+      </div>
+    </div>
+
+    <!-- ÁREA DE IMPRESSÃO (Oculta na tela, visível apenas no cupom) -->
+    <div id="reciboImpressao" class="print-only"></div>
+
+    <script src="Produtos.js"></script>
+    <script src="PainelGarsonCodigo.js"></script>
+  </body>
+</html>
