@@ -104,6 +104,13 @@ function alterarQuantidade(index, delta, precoUnitario) {
 // ==========================================
 
 // Função 1: A que abre a tela
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('PWA Pronto!'))
+        .catch((err) => console.log('Erro no PWA:', err));
+    });
+}
 function selecionarParaAdicionais(nome, index, precoUnitario) {
   let qtd = parseInt(document.getElementById(`qtd-${index}`).innerText);
   let precoTotal = qtd * precoUnitario;

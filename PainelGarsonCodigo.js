@@ -5,6 +5,13 @@ let categoriaAtiva = "Todos";
 // ==========================================
 // LÓGICA DE NAVEGAÇÃO E RENDERIZAÇÃO GERAL
 // ==========================================
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('PWA Pronto!'))
+        .catch((err) => console.log('Erro no PWA:', err));
+    });
+}
 function mostrarTela(idTela) {
   document.querySelectorAll(".container").forEach((t) => (t.style.display = "none"));
   document.getElementById(idTela).style.display = "block";
@@ -79,7 +86,6 @@ function filtrarProdutos() {
     }
   });
 }
-
 function alterarQuantidade(index, delta, precoUnitario) {
   const elQtd = document.getElementById(`qtd-${index}`);
   let qtd = parseInt(elQtd.innerText) + delta;

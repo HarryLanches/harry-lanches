@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Painel Admin - HARRYLANCHES</title>
+  <link rel="manifest" href="manifest-admin.json" />
   <link rel="icon" type="image/png" href="favicon.png" />
   <style>
     /* O SEU CSS FOI MANTIDO INTACTO POIS O DESIGN ESTÁ EXCELENTE */
@@ -142,6 +143,13 @@
      * Isolamos o aplicativo em um namespace único (App) para evitar poluição global
      * e separamos as responsabilidades.
      */
+    if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+        .then(() => console.log('PWA Pronto!'))
+        .catch((err) => console.log('Erro no PWA:', err));
+    });
+}
     const App = {
       Estado: {
         categoriaAtiva: ""

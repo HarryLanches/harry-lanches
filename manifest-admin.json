@@ -1,0 +1,12 @@
+{
+  "name": "Admin Harry",
+  "short_name": "Admin",
+  "start_url": "harrypaineladmin.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    { "src": "favicon.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "favicon.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
