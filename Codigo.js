@@ -11,7 +11,7 @@ function mostrarTela(idTela) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 
   if (idTela === "telaFinalizar") {
-    let total = carrinho.reduce((sum, item) => sum + item.preco, 0);
+    let total = getTotalGeral();
     document.getElementById("valorTotalFinalizar").innerText = `R$ ${total.toFixed(2).replace(".", ",")}`;
     atualizarOpcoesEntrega();
     calcularFalta();
@@ -166,6 +166,13 @@ function adicionarAdicional(nome, preco) {
     produtoEmSelecao.adicionais.map((a) => a.nome).join(", ");
 }
 
+// Função auxiliar para calcular o total somando a taxa se for Entrega
+function getTotalGeral() {
+  let totalItens = carrinho.reduce((sum, item) => sum + item.preco, 0);
+  let tipo = document.getElementById("selectTipo").value;
+  let taxaEntrega = (tipo === "Entrega") ? 1.00 : 0.00;
+  return totalItens + taxaEntrega;
+}
 function finalizarItem() {
   produtoEmSelecao.obs = document.getElementById("inputObservacao").value;
   carrinho.push(produtoEmSelecao);
@@ -199,7 +206,7 @@ function atualizarResumoCarrinho() {
   });
 
   // Atualiza o total no topo da tela inicial
-  let total = carrinho.reduce((sum, item) => sum + item.preco, 0);
+  let total = getTotalGeral();
   document.getElementById('valorTotalHeader').innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
 }
 
@@ -210,13 +217,21 @@ function atualizarResumoCarrinho() {
 function atualizarOpcoesEntrega() {
   let tipo = document.getElementById("selectTipo").value;
   let inputEndereco = document.getElementById("inputEndereco");
+  let linhaTaxa = document.getElementById("linhaTaxaEntrega");
 
   if (tipo === "Entrega") {
     inputEndereco.style.display = "block";
+    if (linhaTaxa) linhaTaxa.style.display = "block"; // MOSTRA A TAXA DE 1,00 PRO CLIENTE
   } else {
     inputEndereco.style.display = "none";
     inputEndereco.value = "";
+    if (linhaTaxa) linhaTaxa.style.display = "none"; // ESCONDE A TAXA CASO SEJA RETIRADA
   }
+  
+  // Recalcula o total do site incluindo ou removendo o 1,00
+  let total = getTotalGeral();
+  document.getElementById("valorTotalFinalizar").innerText = `R$ ${total.toFixed(2).replace(".", ",")}`;
+  calcularFalta();
 }
 
 function getSomaPagamentos() {
@@ -232,7 +247,7 @@ function getSomaPagamentos() {
 }
 
 function togglePagamento(metodo) {
-  let total = carrinho.reduce((sum, item) => sum + item.preco, 0);
+  let total = getTotalGeral();
   let check = document.getElementById(`check${metodo}`);
   let input = document.getElementById(`valor${metodo}`);
 
@@ -265,7 +280,7 @@ function togglePagamento(metodo) {
 }
 
 function calcularFalta() {
-  let total = carrinho.reduce((sum, item) => sum + item.preco, 0);
+  let total = getTotalGeral();
   let soma = getSomaPagamentos();
   let diferenca = total - soma;
   let status = document.getElementById("statusPagamento");
@@ -329,7 +344,7 @@ function concluirPedidoWhatsApp() {
   let semTroco = document.getElementById("checkboxSemTroco").checked;
   let obsGeral = document.getElementById("inputObsGeral").value;
 
-  let total = carrinho.reduce((sum, item) => sum + item.preco, 0);
+  let total = getTotalGeral();
   let somaPagamentos = getSomaPagamentos();
   let diferenca = total - somaPagamentos;
 
@@ -380,6 +395,9 @@ function concluirPedidoWhatsApp() {
   linhas.push(""); // Linha em branco
 
   // Pagamentos (Manda apenas os valores que foram preenchidos)
+  if (tipo === "Entrega") {
+    linhas.push(`ENTREGA: 1.00`);
+  }
   ["Dinheiro", "Pix", "Cartao"].forEach((metodo) => {
     const check = document.getElementById(`check${metodo}`);
     const input = document.getElementById(`valor${metodo}`);
@@ -441,8 +459,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const agora = new Date();
         const horaAtualDecimal = agora.getHours() + (agora.getMinutes() / 60);
 
-        const abreAs = 17.5;  // 17:30
-        const fechaAs = 23.5; // 23:30
+        //const abreAs = 17.5;  // 17:30
+        //const fechaAs = 23.5; // 23:30
 
         let lojaFechada = (horaAtualDecimal < abreAs || horaAtualDecimal >= fechaAs);
 
