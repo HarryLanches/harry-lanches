@@ -419,32 +419,4 @@ if (slider) {
       const walk = (x - startX) * 2; 
       slider.scrollLeft = scrollLeft - walk;
     });
-}
-
-// Fechamento Automático
-document.addEventListener("DOMContentLoaded", function() {
-    function verificarExpediente() {
-        const agora = new Date();
-        const horaAtualDecimal = agora.getHours() + (agora.getMinutes() / 60);
-
-        const abreAs = 17.5;  
-        const fechaAs = 23.5; 
-
-        let lojaFechada = (horaAtualDecimal < abreAs || horaAtualDecimal >= fechaAs);
-        const elFechado = document.getElementById("telaFechado");
-        const containers = document.querySelectorAll(".container");
-
-        if (lojaFechada && elFechado) {
-            document.getElementById("appInterface").style.display = "none";
-            elFechado.style.display = "block";
-        } else if (elFechado) {
-            elFechado.style.display = "none";
-            if (document.getElementById("appInterface").style.display === "none") {
-                 document.getElementById("appInterface").style.display = "block";
-            }
-        }
-    }
-
-    verificarExpediente();
-    setInterval(verificarExpediente, 60000);
-});
+};

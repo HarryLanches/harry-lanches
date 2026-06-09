@@ -350,44 +350,43 @@ function concluirPedidoWhatsApp() {
   let temDinheiro = document.getElementById("checkDinheiro").checked;
   let linhas = [];
 
-  linhas.push(`*TIPO:* ${tipo}`);
-
+  // Dados do Cliente
+  linhas.push(`TIPO: ${tipo}`);
   if (tipo === "Entrega") {
-    linhas.push(`*ENDEREÇO:* ${end}`);
+    linhas.push(`ENDEREÇO: ${end}`);
+  }
+  if (obsGeral) {
+    linhas.push(`OBS GERAL: ${obsGeral}`);
   }
 
-  linhas.push("");
-  linhas.push("━━━━━━━━━━━━━━━");
-  linhas.push("");
-  linhas.push("*ITENS DO PEDIDO:*");
-  linhas.push("");
+  linhas.push(""); // Linha em branco
 
+  // Itens do Pedido (Gera uma linha por quantidade)
   carrinho.forEach((i) => {
-    linhas.push(`*${i.qtd}x ${i.nome}*`);
-    linhas.push(`R$ ${i.preco.toFixed(2).replace(".", ",")}`);
-
+    // Agora enviamos a quantidade "3x " antes do nome
+    let linhaItem = `LANCHE: ${i.qtd}x ${i.nome}`;
+    
     if (i.adicionais && i.adicionais.length > 0) {
-      linhas.push(`+ ${i.adicionais.map((a) => a.nome).join(", ")}`);
+      linhaItem += ` ADICIONAIS: ${i.adicionais.map((a) => "+" + a.nome).join(", ")}`;
     }
+    
+    linhas.push(linhaItem);
 
     if (i.obs) {
-      linhas.push(` ${i.obs}`);
+      linhas.push(`OBS: ${i.obs}`);
     }
-    linhas.push("");
   });
 
-  linhas.push("━━━━━━━━━━━━━━━");
-  linhas.push(`*TOTAL: R$ ${total.toFixed(2).replace(".", ",")}*`);
-  linhas.push("");
-  linhas.push("*PAGAMENTO*");
+  linhas.push(""); // Linha em branco
 
+  // Pagamentos (Manda apenas os valores que foram preenchidos)
   ["Dinheiro", "Pix", "Cartao"].forEach((metodo) => {
     const check = document.getElementById(`check${metodo}`);
     const input = document.getElementById(`valor${metodo}`);
     if (check && check.checked) {
       const valor = parseFloat(input.value) || 0;
-      const nomeReal = metodo === "Cartao" ? "Cartão" : metodo;
-      linhas.push(`• ${nomeReal}: R$ ${valor.toFixed(2).replace(".", ",")}`);
+      const nomeReal = metodo.toUpperCase(); 
+      linhas.push(`${nomeReal}: ${valor.toFixed(2)}`);
     }
   });
 
@@ -396,19 +395,13 @@ function concluirPedidoWhatsApp() {
     if (semTroco) {
       textoTroco = "Sem troco";
     } else if (troco) {
-      textoTroco = `Troco para R$ ${parseFloat(troco).toFixed(2).replace(".", ",")}`;
+      textoTroco = `TROCO PARA: ${parseFloat(troco).toFixed(2)}`;
     }
     linhas.push(`${textoTroco}`);
   }
 
-  if (obsGeral) {
-    linhas.push("");
-    linhas.push("*OBSERVAÇÃO GERAL*");
-    linhas.push(obsGeral);
-  }
-
   const texto = linhas.join("\n");
-  const numeroWhatsApp = "75998662255"; // Seu número
+  const numeroWhatsApp = "75998662255"; // Seu número mantido
 
   window.location.href = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(texto)}`;
 }
